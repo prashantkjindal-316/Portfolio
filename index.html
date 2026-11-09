@@ -336,6 +336,14 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 .pm-x:hover{border-color:var(--ac)}
 .pm-k{font-size:14px;color:var(--ac);font-weight:600;letter-spacing:.02em;padding-right:90px}
 .pm h3{font-size:clamp(32px,5.4vw,64px);margin-top:10px;max-width:16ch}
+.pm-slide{display:block;float:right;width:min(320px,42%);margin:6px 0 14px 24px;border-radius:14px;border:1px solid color-mix(in srgb,var(--ac) 45%,transparent);background:#0b1020;overflow:hidden;box-shadow:0 22px 50px -18px rgba(0,0,0,.8),0 0 40px -14px var(--ac);transform:rotate(1.2deg);transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
+.pm-slide:hover{transform:rotate(0) translateY(-3px) scale(1.03)}
+.pm-slide .bar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(255,255,255,.06);font:600 11px var(--f-body);color:var(--ink-2);letter-spacing:.04em}
+.pm-slide .bar i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.22)}
+.pm-slide .bar i:first-child{background:var(--ac)}
+.pm-slide .bar span{margin-left:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pm-slide img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#fff}
+.pm-slide .cap{display:block;padding:9px 12px;font:600 12px var(--f-body);color:var(--ac)}
 .pm-desc{display:block;margin:24px -16px 0;padding:16px;border-radius:18px;transition:background .25s,box-shadow .25s}
 .pm-desc:hover{background:rgba(255,255,255,.045);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ac) 35%,transparent)}
 .pm-desc p{color:var(--ink-2);margin-top:14px;max-width:64ch;font-size:16.5px}
@@ -455,7 +463,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 }
 @media (max-width:700px){.fv-hi{letter-spacing:.12em}.fv-hi em{letter-spacing:.14em}}
 @media (max-width:760px){nav .btn.sm.cv{display:none}}
-@media (max-width:640px){.pm-nav button.pn span{display:none}.pm-card{border-radius:22px}.pm-desc{margin:20px -10px 0;padding:12px 10px}}
+@media (max-width:640px){.pm-slide{float:none;width:100%;margin:16px 0 0;transform:none}.pm-nav button.pn span{display:none}.pm-card{border-radius:22px}.pm-desc{margin:20px -10px 0;padding:12px 10px}}
 @media (max-width:420px){.idrow{gap:12px}nav{padding:6px 6px 6px 12px}nav .logo{font-size:11px;letter-spacing:.1em;margin-right:6px}.btn.sm{padding:8px 14px;font-size:14px}}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
@@ -755,6 +763,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
     <button type="button" class="pm-x" id="pmx">Close</button>
     <div id="pmb">
       <div class="pm-k" id="pmk"></div><h3 id="pmt"></h3>
+      <a class="pm-slide" id="pmsl" target="_blank" rel="noopener"><span class="bar"><i></i><i></i><i></i><span id="pmsn"></span></span><img loading="lazy" decoding="async" id="pmsi" alt="" width="900" height="506"><span class="cap">Slide 1 of the deck, open it &#8599;</span></a>
       <a class="pm-desc" id="pmd" target="_blank" rel="noopener"><div id="pmp"></div><span class="go">Open the full deck <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       <div class="pm-stat"><b id="pms"></b><span id="pmss"></span></div>
       <div class="pm-act"><a class="btn" id="pmdeck" target="_blank" rel="noopener">Open the deck</a><a class="btn ghost" id="pmrep" target="_blank" rel="noopener">Read the report</a><span class="with" id="pmw"></span></div>
@@ -943,7 +952,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
     pm.style.setProperty('--ac',p.hue);
     document.getElementById('pmk').textContent=t.k;document.getElementById('pmt').textContent=t.h;
     box.textContent='';p.paras.forEach(function(x){var e=document.createElement('p'),c=x.charAt(0)==='*';if(c){e.className='core';x=x.slice(1)}e.textContent=x;box.appendChild(e)});
-    document.getElementById('pmd').href=t.deck;document.getElementById('pmdeck').href=t.deck;
+    document.getElementById('pmd').href=t.deck;var sl=document.getElementById('pmsl'),si=document.getElementById('pmsi');sl.href=t.deck;si.src=t.deck.replace('files/','img/slide-').replace('-deck.pdf','.jpg');si.alt='First slide of the '+t.h+' deck';document.getElementById('pmsn').textContent=t.deck.replace('files/','');document.getElementById('pmdeck').href=t.deck;
     var r=document.getElementById('pmrep');if(t.rep){r.href=t.rep;r.style.display=''}else{r.removeAttribute('href');r.style.display='none'}
     document.getElementById('pms').textContent=t.sb;document.getElementById('pmss').textContent=t.ss;document.getElementById('pmw').textContent=p.with;
     var n=PJ.length,pv=tinfo((i+n-1)%n),nx=tinfo((i+1)%n);
