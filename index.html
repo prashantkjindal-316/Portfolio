@@ -988,7 +988,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
   function pt(g,u){var k=3.2;return{x:g.x0+(g.x1-g.x0)*u,y:g.y0-(g.y0-g.y1)*(Math.exp(k*u)-1)/(Math.exp(k)-1)}}
   var gridC=document.createElement('canvas'),colw=[];
   function size(){
-    dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;
+    dpr=Math.min(devicePixelRatio||1,1.5);W=cv.clientWidth;H=cv.clientHeight;
     cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
     gridC.width=W*dpr;gridC.height=H*dpr;var gx2=gridC.getContext('2d');gx2.setTransform(dpr,0,0,dpr,0,0);gx2.strokeStyle='rgba(255,255,255,.04)';gx2.lineWidth=1;gx2.beginPath();for(var gx=0;gx<W;gx+=80){gx2.moveTo(gx,0);gx2.lineTo(gx,H)}for(var gy=0;gy<H;gy+=80){gx2.moveTo(0,gy);gx2.lineTo(W,gy)}gx2.stroke();
     colw=[];var st0=W<860?26:20;for(var wx0=0;wx0<=W;wx0+=st0){var cc=wx0/W;colw.push((94+(96)*cc|0)+','+(234+11*cc|0)+','+(212+22*cc|0))}
