@@ -1229,7 +1229,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     var rb=[].slice.call(document.querySelectorAll('.reach button')),rn=document.getElementById('reachn');
     rb.forEach(function(b){function on(){var was=b.classList.contains('on');rb.forEach(function(x){x.classList.remove('on')});b.classList.add('on');rn.innerHTML=b.dataset.note;if(!was&&!reduce&&rn.animate){rn.animate([{opacity:0,transform:'translateY(10px)',filter:'blur(4px)'},{opacity:1,transform:'none',filter:'blur(0)'}],{duration:420,easing:'cubic-bezier(.16,.84,.24,1)'});b.animate([{transform:'scale(1)'},{transform:'scale(1.12)'},{transform:'scale(1)'}],{duration:420,easing:'cubic-bezier(.16,.84,.24,1)'})}}b.addEventListener('click',on);b.addEventListener('mouseenter',on)});
     var tabs=[].slice.call(document.querySelectorAll('.stabs button')),panels=[1,2,3].map(function(i){return document.getElementById('sp'+i)}),solve=document.querySelector('.solve'),seen=false;
-    var prevT=0;
+    var prevT=0,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     function show(i,focus){var dd=i>=prevT?1:-1,chg=i!==prevT;prevT=i;tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===i);t.tabIndex=j===i?0:-1});panels.forEach(function(p,j){p.hidden=j!==i;p.classList.remove('go')});
       void panels[i].offsetWidth;requestAnimationFrame(function(){requestAnimationFrame(function(){panels[i].classList.add('go')})});if(focus)tabs[i].focus();
       if(chg&&!reduce&&panels[i].animate){panels[i].animate([{opacity:0,transform:'perspective(900px) translateX('+dd*60+'px) rotateY('+dd*-10+'deg)',filter:'blur(8px)'},{opacity:1,transform:'none',filter:'blur(0)'}],{duration:560,easing:'cubic-bezier(.16,.84,.24,1)'});
