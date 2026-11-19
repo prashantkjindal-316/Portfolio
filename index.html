@@ -402,6 +402,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 .rec.short blockquote{font:700 clamp(24px,2.6vw,32px)/1.15 var(--f-head);letter-spacing:-.02em}
 .rec figcaption{display:flex;align-items:center;gap:14px;margin-top:auto}
 .ini{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--f-head);color:#0A0E1F;background:linear-gradient(140deg,var(--cold),var(--warm))}
+.rec .pic{flex:none;width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;border:2px solid rgba(255,255,255,.14);box-shadow:0 0 0 2px rgba(94,234,212,.28)}
 .rec figcaption b{display:block;font:600 16px var(--f-body)}
 .rec figcaption span{display:block;font-size:13.5px;color:var(--ink-2);line-height:1.35}
 .rec figcaption em{display:block;font-style:normal;font-size:13px;color:var(--warm);margin-top:2px}
@@ -818,13 +819,13 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     <p class="lede">Recommendations from colleagues, on LinkedIn.</p>
     <div class="recs">
       <figure class="rec lead"><blockquote>I had the privilege of working under Prashant Jindal at the Boston Institute of Analytics. As Centre Head, his leadership, mentorship and organizational skills were exceptional. He balanced academic and administrative duties with ease and greatly influenced my professional growth. A dedicated leader and a true asset to any organization.</blockquote>
-        <figcaption><span class="ini" aria-hidden="true">AY</span><div><b>Akash Yadav</b><span>SDR at Threatcop</span><em>Reported to me directly, August 2025</em></div></figcaption></figure>
+        <figcaption><img class="pic" src="img/rec-akash-yadav.jpg" alt="Akash Yadav" width="52" height="52" loading="lazy" decoding="async"><div><b>Akash Yadav</b><span>SDR at Threatcop</span><em>Reported to me directly, August 2025</em></div></figcaption></figure>
       <figure class="rec"><blockquote>Prashant is an intelligent and hardworking Sales Manager. He continually learns new skills to facilitate his performance. He knows how to optimally use the resources to harness the best output from his team. His training and motivation skills are excellent, which aids his leadership. As a sales leader he would earn my highest recommendation.</blockquote>
-        <figcaption><span class="ini" aria-hidden="true">AJ</span><div><b>Anmol Jauhari</b><span>FinTech, Payments, Revenue Growth, GTM Strategy</span><em>Senior to me, October 2022</em></div></figcaption></figure>
+        <figcaption><img class="pic" src="img/rec-anmol-jauhari.jpg" alt="Anmol Jauhari" width="52" height="52" loading="lazy" decoding="async"><div><b>Anmol Jauhari</b><span>FinTech, Payments, Revenue Growth, GTM Strategy</span><em>Senior to me, October 2022</em></div></figcaption></figure>
       <figure class="rec"><blockquote>He is a good leader who focuses on team work and always motivates his team for good performance. His business strategies and training helped me a lot in clearing the BDT program at BYJU'S.</blockquote>
         <figcaption><span class="ini" aria-hidden="true">AG</span><div><b>Ayush Gupta</b><span>Assistant Manager at Paytm</span><em>Reported to me directly, October 2021</em></div></figcaption></figure>
       <figure class="rec short lead"><blockquote>&ldquo;Most energetic one in the company.&rdquo;</blockquote>
-        <figcaption><span class="ini" aria-hidden="true">AT</span><div><b>Ankit Thakur</b><span>Development Professional</span><em>Reported to me directly, October 2022</em></div></figcaption></figure>
+        <figcaption><img class="pic" src="img/rec-ankit-thakur.jpg" alt="Ankit Thakur" width="52" height="52" loading="lazy" decoding="async"><div><b>Ankit Thakur</b><span>Development Professional</span><em>Reported to me directly, October 2022</em></div></figcaption></figure>
     </div>
     <p class="src">Copied from <a href="https://www.linkedin.com/in/prashantjindalie" target="_blank" rel="noopener">LinkedIn</a>, with spelling and punctuation tidied.</p>
   </div>
@@ -919,6 +920,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
   }
   function draw(ts){
     if(!visible){requestAnimationFrame(draw);return}
+    if(!W||!H||!gridC.width||!gridC.height){size();if(!W||!H||!gridC.width||!gridC.height){requestAnimationFrame(draw);return}}
     if(t0===null)t0=ts;
     var p=reduce?1:Math.min((ts-t0)/DUR,1),e=ease(p),g=geom();
     ctx.clearRect(0,0,W,H);
@@ -951,7 +953,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
   var hero=document.querySelector('.hero');
   hero.addEventListener('pointermove',function(e){var r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
   hero.addEventListener('pointerleave',function(){mx=my=-999});
-  size();addEventListener('resize',size);
+  size();var lastW=W;addEventListener('resize',function(){if(cv.clientWidth!==lastW){lastW=cv.clientWidth;size()}});
   new IntersectionObserver(function(en){visible=en[0].isIntersecting}).observe(document.querySelector('.hero'));
   requestAnimationFrame(draw);
 
@@ -972,7 +974,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     }
     var cur=S[0].map(function(o){return{p:[o.p[0]*.2,o.p[1]*.2,o.p[2]*.2],c:o.c.slice()}}),sc=0,tilt=[.1,0,1.05,.95],tl=tilt[0],wv=.1,w0=1,mx=0,my=0,tmx=0,tmy=0,mpx=-999,mpy=-999,cxl=innerWidth*.7,scl=1,cxs=[.7,.27,.72,.5],scs=[1,1,1,1.5],dust=[],AC=['rgba(60,95,210,.20)','rgba(94,234,212,.13)','rgba(80,60,190,.12)'],t0=performance.now();
     function size(){D=Math.min(devicePixelRatio||1,1.5);W=innerWidth;H=innerHeight;c.width=W*D;c.height=H*D;g.setTransform(D,0,0,D,0,0)}
-    size();addEventListener('resize',size);
+    size();var lastW=W;addEventListener('resize',function(){if(cv.clientWidth!==lastW){lastW=cv.clientWidth;size()}});
     var secs=[].slice.call(document.querySelectorAll('main>section')),map=[0,1,1,1,2,2,3,3,0,1,0];
     function pick(){var y=innerHeight*.5,n=0;for(var i=0;i<secs.length;i++){var r=secs[i].getBoundingClientRect();if(r.top<=y){n=map[i]!==undefined?map[i]:0}}
       if(scrollY<innerHeight*.5)n=0;sc=n}
