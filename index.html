@@ -164,7 +164,8 @@ nav .btn.sm.cv{margin-right:2px}
 .proj.lead .pthumb{top:36px;right:36px;width:min(34%,360px);border-radius:20px;transform:rotate(2deg)}
 .proj.lead .pthumb span{left:12px;bottom:12px;font-size:11px;padding:4px 10px}
 .proj:not(.lead) .k,.proj:not(.lead) h3{margin-right:176px}
-@media(max-width:700px){.proj .pthumb,.proj.lead .pthumb{position:relative;top:auto;right:auto;width:100%;order:-1;transform:none;border-radius:16px}.proj:not(.lead) .k,.proj:not(.lead) h3{margin-right:0}.proj:hover .pthumb{transform:none}}
+.proj.lead>.k,.proj.lead>h3,.proj.lead>p{margin-right:calc(min(34%,360px) + 28px)}
+@media(max-width:700px){.proj .pthumb,.proj.lead .pthumb{position:relative;top:auto;right:auto;width:100%;order:-1;transform:none;border-radius:16px}.proj:not(.lead) .k,.proj:not(.lead) h3{margin-right:0}.proj.lead>.k,.proj.lead>h3,.proj.lead>p{margin-right:0}.proj:hover .pthumb{transform:none}}
 @media(prefers-reduced-motion:reduce){.proj .pthumb,.proj .pthumb img,.proj .pthumb::after{transition:none}}
 
 .proj .open svg{transition:transform .3s}
