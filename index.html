@@ -373,6 +373,8 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 .dash{display:grid;grid-template-columns:.8fr 1.4fr;gap:clamp(28px,5vw,70px);align-items:center}
 .dash p{color:var(--ink-2);margin-top:18px;max-width:46ch}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.chips a{padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink-2);text-decoration:none;transition:border-color .2s,color .2s}
+.chips a:hover{border-color:var(--cold);color:var(--ink)}
 .chips span{padding:7px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink-2)}
 .frame{perspective:1400px}
 .win{border-radius:16px;overflow:hidden;border:1px solid rgba(110,170,255,.35);background:#0a0f20;box-shadow:0 24px 50px -28px rgba(60,130,255,.5),0 0 0 1px rgba(255,255,255,.03);transform:rotateY(-7deg) rotateX(3deg);transition:transform .5s cubic-bezier(.2,.7,.2,1);will-change:transform}
@@ -653,8 +655,8 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
     <div>
       <h2>I cofounded Bingemind.</h2>
       <p>Bingemind is an AI automation agency. It builds voice agents, AI receptionists, chat and WhatsApp assistants and workflow automation for clinics, estate agents, online shops and operations teams. I lead the business side. Abhishek Mishra leads the technical side.</p>
-      <p>Alongside the agents, we build custom tools and micro websites: small, single-purpose pages and tools made for one job.</p>
-      <div class="chips"><span>Custom tools</span><span>Micro websites</span><span>Voice agents</span><span>WhatsApp assistants</span><span>Workflow automation</span></div>
+      <p>Bingemind also runs a library of 46 free browser tools at bingemind.com/tools. Each one does one job, needs no sign-up, and keeps your files on your device. The most useful ones are for work and pay:</p>
+      <div class="chips tl"><a href="https://bingemind.com/overtime-calculator/" target="_blank" rel="noopener">Overtime calculator</a><a href="https://bingemind.com/take-home-pay-calculator/" target="_blank" rel="noopener">Take-home pay calculator</a><a href="https://bingemind.com/time-card-calculator/" target="_blank" rel="noopener">Time card calculator</a><a href="https://bingemind.com/hourly-to-salary-calculator/" target="_blank" rel="noopener">Hourly to salary</a><a href="https://bingemind.com/mileage-log-maker/" target="_blank" rel="noopener">Mileage log maker</a><a href="https://bingemind.com/tools/" target="_blank" rel="noopener">All 46 tools</a></div>
       <div class="cta"><a class="btn" data-magnet href="https://bingemind.com" target="_blank" rel="noopener">Visit bingemind.com <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     </div>
     <div class="flow" aria-label="One call, handled end to end">
