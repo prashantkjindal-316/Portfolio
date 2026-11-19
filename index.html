@@ -709,6 +709,95 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
   </div>
 </section>
 
+<section id="casestudy" style="padding-top:0">
+<style>
+#casestudy .cs-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:30px}
+#casestudy .cs-lane{display:flex;gap:8px}
+#casestudy .cs-lane button,#casestudy .cs-steps button{all:unset;cursor:pointer;box-sizing:border-box}
+#casestudy .cs-lane button{padding:9px 18px;border:1px solid var(--line);border-radius:999px;font:500 15px var(--f-body);color:var(--ink-2);transition:all .25s}
+#casestudy .cs-lane button.on{background:var(--cold);border-color:var(--cold);color:#0A0E1F;font-weight:600}
+#casestudy .cs-upd{font-size:13px;color:var(--ink-2)}
+#casestudy .cs-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+#casestudy .cs-kpi{border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;background:rgba(255,255,255,.025)}
+#casestudy .cs-kpi b{display:block;font:600 clamp(28px,3.4vw,44px)/1.05 var(--f-fv);color:var(--warm);font-variant-numeric:tabular-nums}
+#casestudy .cs-kpi span{display:block;margin-top:8px;font-size:14px;color:var(--ink-2)}
+#casestudy .cs-flow{margin-top:34px;display:grid;grid-template-columns:minmax(220px,.8fr) 1.5fr;gap:clamp(18px,3vw,40px)}
+#casestudy .cs-steps{display:flex;flex-direction:column;gap:8px;counter-reset:s}
+#casestudy .cs-steps button{counter-increment:s;display:flex;gap:12px;align-items:center;padding:12px 14px;border:1px solid var(--line);border-radius:14px;color:var(--ink-2);font:500 15.5px var(--f-body);transition:all .25s}
+#casestudy .cs-steps button::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--f-fv);border:1px solid var(--line)}
+#casestudy .cs-steps button:hover{color:var(--ink);border-color:var(--cold)}
+#casestudy .cs-steps button.on{color:var(--ink);border-color:var(--cold);background:rgba(231,184,97,.08)}
+#casestudy .cs-steps button.on::before{background:var(--cold);color:#0A0E1F;border-color:var(--cold)}
+#casestudy .cs-steps button:focus-visible{outline:2px solid var(--cold);outline-offset:3px}
+#casestudy .cs-panel{border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,34px);background:rgba(255,255,255,.03);min-height:330px}
+#casestudy .cs-who{display:inline-block;padding:5px 12px;border-radius:999px;font:600 12.5px var(--f-body);letter-spacing:.04em;text-transform:uppercase;border:1px solid}
+#casestudy .cs-who.ai{color:#B79CFF;border-color:rgba(183,156,255,.5)}
+#casestudy .cs-who.code{color:var(--mint);border-color:rgba(127,224,176,.5)}
+#casestudy .cs-who.me{color:var(--cold);border-color:rgba(231,184,97,.5)}
+#casestudy .cs-panel h3{margin-top:16px;font:600 clamp(22px,2.4vw,30px)/1.2 var(--f-fv)}
+#casestudy .cs-panel p{margin-top:12px;color:var(--ink-2);max-width:60ch}
+#casestudy .cs-panel ul{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+#casestudy .cs-panel li{padding-left:22px;position:relative;color:var(--ink-2);font-size:15.5px}
+#casestudy .cs-panel li::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:2px;background:var(--cold)}
+#casestudy .cs-panel .cs-fail{margin-top:18px;padding:12px 14px;border-left:2px solid var(--cold);background:rgba(231,184,97,.06);border-radius:0 10px 10px 0;font-size:15px;color:var(--ink)}
+#casestudy .cs-rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+#casestudy .cs-rule{border:1px solid var(--line);border-radius:16px;padding:20px}
+#casestudy .cs-rule h3{font:600 18px var(--f-fv)}#casestudy .cs-rule p{margin-top:8px;color:var(--ink-2);font-size:15.5px}
+#casestudy .cs-fade{animation:csin .35s ease}
+@keyframes csin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:860px){#casestudy .cs-kpis{grid-template-columns:repeat(2,1fr)}#casestudy .cs-flow{grid-template-columns:1fr}#casestudy .cs-rules{grid-template-columns:1fr}#casestudy .cs-steps{flex-direction:row;overflow-x:auto;padding-bottom:6px}#casestudy .cs-steps button{white-space:nowrap}#casestudy .cs-panel{min-height:0}}
+@media(prefers-reduced-motion:reduce){#casestudy .cs-fade{animation:none}}
+</style>
+  <div class="wrap">
+    <h2>Case study: Friday and Jarvis</h2>
+    <p class="lede">The problem: I was applying to many roles and losing track. The fix: two systems that do the searching and the paperwork, a second AI that checks the first, and me making every final call. Pick a lane, then click through the steps.</p>
+    <div class="cs-top">
+      <div class="cs-lane" role="group" aria-label="Choose a lane"><button type="button" class="on" data-lane="friday">Friday: live postings</button><button type="button" data-lane="jarvis">Jarvis: target firms</button></div>
+      <div class="cs-upd" id="csUpd" aria-live="polite">Totals so far</div>
+    </div>
+    <div class="cs-kpis" id="csK"></div>
+    <div class="cs-flow">
+      <div class="cs-steps" id="csS" role="tablist" aria-label="Pipeline steps"></div>
+      <div class="cs-panel" id="csP" role="tabpanel" aria-live="polite"></div>
+    </div>
+    <div class="cs-rules">
+      <div class="cs-rule"><h3>It cannot send anything</h3><p>The agents have no email, chat or LinkedIn tools. They prepare a resume, cover letter and answers. I read them and press send myself.</p></div>
+      <div class="cs-rule"><h3>Facts only from my own file</h3><p>Every claim about me comes from one verified file. If a fact is not in it, the agent leaves it out, and the auditor checks the same list.</p></div>
+      <div class="cs-rule"><h3>Costs nothing and stays bounded</h3><p>Free tools and public job pages only. Each run has time, turn and dollar limits, so a stuck agent stops instead of running all night.</p></div>
+    </div>
+  </div>
+<script>
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var D={friday:{lane:'Friday',kp:[['roles_scored','Roles scored'],['shortlisted','Shortlisted at 7+ out of 10'],['companies','Companies seen'],['documents','Documents drafted']],fb:{roles_scored:251,shortlisted:104,companies:190,documents:400}},
+ jarvis:{lane:'Jarvis',kp:[['firms_checked','Firms checked'],['runs','Runs completed'],['two','Lanes, fully separate'],['three','Checks before "done"']],fb:{firms_checked:950,runs:15,two:2,three:3}}};
+var S=[
+ {w:'code',t:'Preflight check',h:'Can this lane start?',p:'Plain code, no AI. Before spending any tokens it checks that the data folders exist, the config is there, no other run holds the lock, and the limits are set.',l:['Read only: it changes nothing','Stops the lane with an alert if anything is missing'],f:'If this fails, the lane stops and I get a notification. The other lane is not affected.'},
+ {w:'ai',t:'AI agent searches and builds',h:'Find roles, score them, write the package',
+  p:{friday:'Friday looks at live postings across companies that fit, on the employer\'s own page. Each role gets a 100 point score. Roles at 7 out of 10 or more get a resume, a cover letter and application answers.',jarvis:'Jarvis only works the firms on my target list. It picks the next firms, searches each one on its own careers page, scores the roles and builds the package for the ones that qualify.'},
+  l:['Skips any job it has already seen in the last 30 days','Applies my hard rules: language, pay floor, level, work rights','Keeps going until it has 15 qualifying jobs, or hits a limit and says so honestly'],f:'If it cannot check something, it skips it and records why. It never pads the count.'},
+ {w:'code',t:'Verify data',h:'Do the files and rows really exist?',p:'Plain code counts what the agent claims against what is actually on disk: the database rows, and the resume, cover letter and answers files for each job.',l:['A job is not done unless the row and all three files exist','Cover letters must follow the length rule'],f:'Anything missing is listed, not hidden.'},
+ {w:'ai',t:'Independent audit',h:'A second AI that only reads',p:'A separate agent with no permission to edit anything. It reopens every job link, reads each resume and cover letter against my verified facts, and checks the LinkedIn contact links.',l:['Flags job aggregators, closed roles and dead links','Flags any claim that is not in my verified file','Reports what it could not verify instead of guessing'],f:'The builder cannot mark its own homework: only this agent\'s report counts.'},
+ {w:'code',t:'Finalize',h:'Mark the run complete, or not',p:'Code reads the checks and the audit report. A run is marked complete only if verification passed, the audit was clean and covered every item, and the 15 job target was met.',l:['Otherwise it writes a "needs fixes" note with the reasons','Dry runs can never be marked complete'],f:'"Complete" has to be earned, so a green tick means something.'},
+ {w:'code',t:'Update the sheet',h:'Dates, comments, status',p:'Each lane writes its own Google Sheet with the date, the latest comment and the status. It never touches the columns I own, and it never marks anything as applied.',l:['Friday has a sheet that mirrors my Jarvis tracker','The totals on this page update from the same run'],f:'My own columns and statuses are never overwritten.'},
+ {w:'me',t:'I review and apply',h:'The only step that sends anything',p:'I open the sheet, read each package, fix what I want and apply myself. Replies and applied dates are mine to record.',l:['Nothing leaves my machine without me','Both lanes are built to run every 3 days on a free, self-hosted n8n workflow'],f:'AI drafts. I decide what is true about me.'}];
+var whoName={ai:'AI agent',code:'Plain code',me:'Me'};
+var lane='friday',cur=0,stats=null,kp=document.getElementById('csK'),sb=document.getElementById('csS'),pn=document.getElementById('csP'),upd=document.getElementById('csUpd');
+function fmt(n){return typeof n==='number'?n.toLocaleString('en-US'):n}
+function count(el,to){if(reduce||typeof to!=='number'){el.textContent=fmt(to);return}var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/900);el.textContent=fmt(Math.round(to*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(f)})(t0)}
+function val(key){var s=stats&&stats[lane];if(s&&typeof s[key]==='number')return s[key];return D[lane].fb[key]}
+function drawK(){kp.textContent='';D[lane].kp.forEach(function(k){var d=document.createElement('div'),b=document.createElement('b'),sp=document.createElement('span');d.className='cs-kpi';sp.textContent=k[1];d.appendChild(b);d.appendChild(sp);kp.appendChild(d);count(b,val(k[0]))});
+ upd.textContent=stats&&stats.updated?'Updated automatically after each run. Last update: '+new Date(stats.updated+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'Totals so far'}
+function drawS(){sb.textContent='';S.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-selected',i===cur);b.className=i===cur?'on':'';b.textContent=s.t;b.addEventListener('click',function(){cur=i;drawS();drawP()});b.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowRight'){cur=(cur+1)%S.length}else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){cur=(cur+S.length-1)%S.length}else return;e.preventDefault();drawS();drawP();sb.children[cur].focus()});sb.appendChild(b)})}
+function drawP(){var s=S[cur],p=typeof s.p==='string'?s.p:s.p[lane];pn.textContent='';pn.classList.remove('cs-fade');void pn.offsetWidth;pn.classList.add('cs-fade');
+ var w=document.createElement('span');w.className='cs-who '+s.w;w.textContent=whoName[s.w];var h=document.createElement('h3');h.textContent=s.h;var pp=document.createElement('p');pp.textContent=p;var ul=document.createElement('ul');s.l.forEach(function(x){var li=document.createElement('li');li.textContent=x;ul.appendChild(li)});var f=document.createElement('div');f.className='cs-fail';f.textContent=s.f;[w,h,pp,ul,f].forEach(function(n){pn.appendChild(n)})}
+document.querySelectorAll('#casestudy .cs-lane button').forEach(function(b){b.addEventListener('click',function(){lane=b.dataset.lane;document.querySelectorAll('#casestudy .cs-lane button').forEach(function(x){x.classList.toggle('on',x===b)});drawK();drawP()})});
+drawK();drawS();drawP();
+fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(j){if(j){stats=j;drawK()}}).catch(function(){});
+})();
+</script>
+</section>
+
 <section id="recs" style="padding-top:0">
   <div class="wrap">
     <h2>What people say</h2>
