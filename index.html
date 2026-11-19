@@ -153,6 +153,20 @@ nav .btn.sm.cv{margin-right:2px}
 .proj .stat b{font:800 clamp(30px,3.4vw,44px) var(--f-head);letter-spacing:-.03em;color:var(--warm);line-height:1}
 .proj .stat span{font-size:14px;color:var(--ink-2);max-width:34ch;line-height:1.35}
 .proj .foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;font-size:14px;color:var(--ink-2)}
+/* deck cover thumbnails on project cards */
+.proj .pthumb{position:absolute;top:26px;right:26px;width:156px;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.2);box-shadow:0 14px 34px rgba(0,0,0,.45),0 0 0 4px rgba(255,255,255,.03);transform:rotate(2.5deg);transition:transform .55s cubic-bezier(.16,.84,.24,1),box-shadow .55s,border-color .3s;z-index:1;background:#0b1226}
+.proj .pthumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,.84,.24,1)}
+.proj .pthumb::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%);transform:translateX(-120%);transition:transform .9s cubic-bezier(.16,.84,.24,1);pointer-events:none}
+.proj .pthumb span{position:absolute;left:8px;bottom:8px;padding:3px 8px;border-radius:999px;background:rgba(5,8,18,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);font:600 10px var(--f-body);letter-spacing:.12em;text-transform:uppercase;color:#d8fff7}
+.proj:hover .pthumb{transform:rotate(0) translateY(-4px) scale(1.06);border-color:rgba(94,234,212,.7);box-shadow:0 20px 44px rgba(0,0,0,.55),0 0 28px rgba(94,234,212,.22)}
+.proj:hover .pthumb img{transform:scale(1.07)}
+.proj:hover .pthumb::after{transform:translateX(120%)}
+.proj.lead .pthumb{top:36px;right:36px;width:min(34%,360px);border-radius:20px;transform:rotate(2deg)}
+.proj.lead .pthumb span{left:12px;bottom:12px;font-size:11px;padding:4px 10px}
+.proj:not(.lead) .k,.proj:not(.lead) h3{margin-right:176px}
+@media(max-width:700px){.proj .pthumb,.proj.lead .pthumb{position:relative;top:auto;right:auto;width:100%;order:-1;transform:none;border-radius:16px}.proj:not(.lead) .k,.proj:not(.lead) h3{margin-right:0}.proj:hover .pthumb{transform:none}}
+@media(prefers-reduced-motion:reduce){.proj .pthumb,.proj .pthumb img,.proj .pthumb::after{transition:none}}
+
 .proj .open svg{transition:transform .3s}
 .proj:hover .open svg{transform:translate(3px,-3px)}
 .proj .rep{position:relative;z-index:2;color:var(--ink-2);border-bottom:1px solid var(--line);transition:color .2s,border-color .2s}
@@ -587,6 +601,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
     <div class="projs">
 
       <article class="proj lead">
+        <div class="pthumb" aria-hidden="true"><img src="img/deck-patagonia-loopid.jpg" alt="" width="900" height="506" loading="lazy" decoding="async"><span>Deck cover</span></div>
         <div class="k">Digital Innovation in Fashion</div>
         <h3>Patagonia LoopID</h3>
         <p>Patagonia's Worn Wear resale program spent 15 to 20 minutes verifying and pricing each used item, while counterfeits flooded the market. We designed a Digital Product Passport: an NFC chip in every garment that shows where it was made, what it is made of, every repair and its resale value, stored on blockchain. The idea: stop selling products, start managing assets.</p>
@@ -596,6 +611,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 
 
       <article class="proj">
+        <div class="pthumb" aria-hidden="true"><img src="img/deck-oatly.jpg" alt="" width="900" height="506" loading="lazy" decoding="async"><span>Deck cover</span></div>
         <div class="k">Supply Chain Transformation</div>
         <h3>Oatly</h3>
         <p>Oatly sits between two supply chain models. We placed it on the maturity curve and wrote a five-year roadmap: protect the oat base IP, run a cloud ERP for real-time demand, and forecast from outside in.</p>
@@ -605,6 +621,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 
 
       <article class="proj">
+        <div class="pthumb" aria-hidden="true"><img src="img/deck-estrella-galicia.jpg" alt="" width="900" height="506" loading="lazy" decoding="async"><span>Deck cover</span></div>
         <div class="k">Brand and Marketing Strategy</div>
         <h3>Estrella Galicia</h3>
         <p>Loved in the north, under-bought in Madrid, Barcelona and Valencia. A 5C and 4P analysis led to a national campaign for the brand's 120th anniversary: limited-edition city bottles, bar and terrace activation, outdoor ads and a loyalty game.</p>
@@ -614,6 +631,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 
 
       <article class="proj">
+        <div class="pthumb" aria-hidden="true"><img src="img/deck-sport-obermeyer.jpg" alt="" width="900" height="506" loading="lazy" decoding="async"><span>Deck cover</span></div>
         <div class="k">Operations and Forecasting Risk</div>
         <h3>Sport Obermeyer</h3>
         <p>Over $5M of skiwear production was committed four months before retailers gave any data. We recommended delaying commitments until after the trade show, keeping fabric undyed longer, and sourcing risky styles for flexibility and safe ones for cost.</p>
@@ -623,6 +641,7 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 
 
       <article class="proj">
+        <div class="pthumb" aria-hidden="true"><img src="img/deck-champions-league.jpg" alt="" width="900" height="506" loading="lazy" decoding="async"><span>Deck cover</span></div>
         <div class="k">Data and Sports Analytics</div>
         <h3>Champions League goals</h3>
         <p>Which game statistics actually predict goals? We took 36 European teams from the Champions League and ran a backward-elimination regression. Only two variables survived: attempts on target and possession. The model explains over 70% of goals scored.</p>
