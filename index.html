@@ -1143,6 +1143,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
   var tiles=[].slice.call(document.querySelectorAll('.projs .proj')),pm=document.getElementById('pm'),pmc=document.getElementById('pmc'),pmb=document.getElementById('pmb'),
       pmbg=document.getElementById('pmbg'),pmfl=document.getElementById('pmfl'),fx=document.getElementById('pmfx'),fctx=fx.getContext('2d'),
       cur=-1,busy=false,lastFocus=null,parts=[],raf=0;
+  (window.requestIdleCallback||function(f){setTimeout(f,1500)})(function(){tiles.forEach(function(t){var im=new Image();im.src=t.querySelector('.pthumb img').src})});
   function tinfo(i){var t=tiles[i];return{k:t.querySelector('.k').textContent,h:t.querySelector('h3').textContent,sb:t.querySelector('.stat b').textContent,ss:t.querySelector('.stat span').textContent,
     deck:t.querySelector('.open').dataset.deck,rep:(t.querySelector('.rep')||{}).href}}
   function fill(i){
