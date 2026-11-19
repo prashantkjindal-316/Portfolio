@@ -931,13 +931,13 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
 
   /* swipe: drag the card sideways with a finger or mouse; it follows, then slides to the next one */
   function swipeable(el,target,go){
-    var sx=0,sy=0,st=0,dx=0,act=false,mode=0,isMouse=false;
+    var sx=0,sy=0,st=0,dx=0,act=false,mode=0,isMouse=false,mpid=null,wacc=0,wlock=false,wt=0;
     el.style.touchAction='pan-y';
     function start(x,y,mouse){act=true;isMouse=mouse;sx=x;sy=y;st=performance.now();dx=0;mode=0}
     function move(x,y,e){
       if(!act)return;dx=x-sx;var dy=y-sy;
       if(!mode){
-        if(Math.abs(dx)>8&&Math.abs(dx)>Math.abs(dy)*1.15){mode=1;el.style.userSelect='none';try{getSelection().removeAllRanges()}catch(_){}}
+        if(Math.abs(dx)>8&&Math.abs(dx)>Math.abs(dy)*1.15){mode=1;el.style.userSelect='none';if(isMouse&&mpid!=null){try{el.setPointerCapture(mpid)}catch(_){}}try{getSelection().removeAllRanges()}catch(_){}}
         else if(Math.abs(dy)>10)mode=2}
       if(mode===1){if(e&&e.cancelable)e.preventDefault();
         if(!reduce){var k=Math.min(1,Math.abs(dx)/320);target.style.transform='translate3d('+dx*.7+'px,0,0)';target.style.opacity=1-k*.45}}}
@@ -957,10 +957,17 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     el.addEventListener('touchend',function(){end(false)});
     el.addEventListener('touchcancel',function(){end(true)});
     /* mouse and pen: drag with pointer events */
-    el.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'||e.button!==0||e.target.closest('input,textarea,select'))return;start(e.clientX,e.clientY,true);try{el.setPointerCapture(e.pointerId)}catch(_){}});
+    el.addEventListener('pointerdown',function(e){if(e.pointerType==='touch'||e.button!==0||e.target.closest('input,textarea,select'))return;start(e.clientX,e.clientY,true);mpid=e.pointerId});
     el.addEventListener('pointermove',function(e){if(e.pointerType==='touch'||!act)return;move(e.clientX,e.clientY,null)});
     el.addEventListener('pointerup',function(e){if(e.pointerType==='touch')return;end(false)});
     el.addEventListener('pointercancel',function(e){if(e.pointerType==='touch')return;end(true)});
+    /* laptop trackpad: a two-finger sideways swipe (or shift + wheel) flips to the next one */
+    el.addEventListener('wheel',function(e){
+      var ax=Math.abs(e.deltaX),ay=Math.abs(e.deltaY),h=ax>ay*1.2||(e.shiftKey&&ay>0);
+      if(!h)return;e.preventDefault();
+      if(wlock)return;var d=ax>=ay?e.deltaX:e.deltaY;wacc+=d;clearTimeout(wt);wt=setTimeout(function(){wacc=0},220);
+      if(Math.abs(wacc)>70){var dir=wacc>0?1:-1;wacc=0;wlock=true;setTimeout(function(){wlock=false},900);go(dir,{t:'',o:''})}
+    },{passive:false});
   }
 
   /* hero: the growth curve draws itself while the revenue counter climbs */
@@ -976,7 +983,8 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     colw=[];var st0=W<860?26:20;for(var wx0=0;wx0<=W;wx0+=st0){var cc=wx0/W;colw.push((94+(96)*cc|0)+','+(234+11*cc|0)+','+(212+22*cc|0))}
     P=[];var n=0;for(var i=0;i<n;i++)P.push({x:Math.random()*W,y:Math.random()*H,s:.3+Math.random()*1.1,r:Math.random()*1.6+.4});
   }
-  function draw(ts){
+  function draw(ts){try{drawBody(ts)}catch(e){requestAnimationFrame(draw)}}
+  function drawBody(ts){
     if(!visible){requestAnimationFrame(draw);return}
     if(!W||!H||!gridC.width||!gridC.height){size();if(!W||!H||!gridC.width||!gridC.height){requestAnimationFrame(draw);return}}
     if(t0===null)t0=ts;
@@ -1039,7 +1047,8 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     addEventListener('scroll',pick,{passive:true});pick();
     addEventListener('pointermove',function(e){tmx=e.clientX/W-.5;tmy=e.clientY/H-.5;mpx=e.clientX;mpy=e.clientY},{passive:true});
     for(var di=0;di<(matchMedia('(max-width:860px)').matches?150:620);di++)dust.push({x:Math.random(),y:Math.random(),z:.2+Math.random()*.8});
-    var lastF=0;function frame(now){if(!reduce&&(now-lastF<(lite?40:24)||document.body.style.overflow==='hidden'||document.hidden)){requestAnimationFrame(frame);return}lastF=now;
+    var lastF=0;function frame(now){try{frameBody(now)}catch(e){requestAnimationFrame(frame)}}
+    function frameBody(now){if(!reduce&&(now-lastF<(lite?30:24)||document.body.style.overflow==='hidden'||document.hidden)){requestAnimationFrame(frame);return}lastF=now;
       var t=(now-t0)/1000,tg=S[sc],k=reduce?1:.055;
       mx+=(tmx-mx)*.05;my+=(tmy-my)*.05;tl+=(tilt[sc]-tl)*.04;wv+=((sc===3?1:.12)-wv)*.04;
       w0+=((sc===0?1:0)-w0)*.04;var yaw=reduce?.3:(t*.22)*(1-w0)+Math.sin(t*.5)*.38*w0+mx*1.1,pit=tl+my*.4,cy_=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pit),sp=Math.sin(pit);
