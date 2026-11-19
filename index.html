@@ -325,9 +325,9 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 /* pure-CSS drifting aurora behind the canvas: runs on the GPU, so it keeps moving even if scripts are slow */
 .aurora{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
 .aurora i{position:absolute;left:-20vmax;top:-20vmax;width:90vmax;height:90vmax;border-radius:50%;will-change:transform;backface-visibility:hidden}
-.aurora i:nth-child(1){background:radial-gradient(circle,rgba(60,95,210,.34),transparent 62%);animation:au1 22s ease-in-out infinite alternate}
-.aurora i:nth-child(2){background:radial-gradient(circle,rgba(94,234,212,.24),transparent 62%);animation:au2 27s ease-in-out infinite alternate}
-.aurora i:nth-child(3){background:radial-gradient(circle,rgba(130,90,230,.26),transparent 62%);animation:au3 31s ease-in-out infinite alternate}
+.aurora i:nth-child(1){background:radial-gradient(circle,rgba(60,95,210,.26),transparent 62%);animation:au1 22s ease-in-out infinite alternate}
+.aurora i:nth-child(2){background:radial-gradient(circle,rgba(94,234,212,.18),transparent 62%);animation:au2 27s ease-in-out infinite alternate}
+.aurora i:nth-child(3){background:radial-gradient(circle,rgba(130,90,230,.2),transparent 62%);animation:au3 31s ease-in-out infinite alternate}
 @keyframes au1{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(70vw,40vh,0) scale(1.25)}}
 @keyframes au2{from{transform:translate3d(80vw,10vh,0) scale(1.1)}to{transform:translate3d(10vw,70vh,0) scale(.9)}}
 @keyframes au3{from{transform:translate3d(30vw,80vh,0) scale(.95)}to{transform:translate3d(90vw,20vh,0) scale(1.2)}}
