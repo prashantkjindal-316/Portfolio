@@ -474,6 +474,26 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 .hmm-nav button:hover{border-color:rgba(94,234,212,.6);background:rgba(94,234,212,.08)}
 .hmm-nav button:focus-visible{outline:2px solid var(--cold);outline-offset:3px}
 .hmm-hint{color:var(--ink-2);font-size:13px;margin-top:12px;letter-spacing:.02em}
+.hmm-c::before,.hmm-c::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0}
+.hmm-c>*{position:relative;z-index:1}
+@media (hover:hover) and (pointer:fine){
+  .hmm{position:relative;isolation:isolate}
+  .hmm::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(560px circle at var(--sx,50%) var(--sy,60%),rgba(94,234,212,.10),rgba(142,162,255,.05) 45%,transparent 70%);opacity:0;transition:opacity .5s}
+  .hmm.live::before{opacity:1}
+  .hmm-c{overflow:hidden;transition:border-color .3s,box-shadow .3s}
+  .hmm-c::after{background:radial-gradient(240px circle at var(--mx,50%) var(--my,30%),rgba(255,255,255,.16),rgba(94,234,212,.08) 40%,transparent 70%);transition:opacity .3s}
+  .hmm-c.hot::after{opacity:1}
+  .hmm-c::before{inset:-40% auto -40% -60%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-18deg)}
+  .hmm-c.front::before{animation:hmmShine 5.5s ease-in-out 1.2s infinite}
+  .hmm-b{transform:perspective(520px) translateY(0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1);transition:transform .22s ease-out,box-shadow .3s;box-shadow:0 10px 30px -12px rgba(0,0,0,.6)}
+  .hmm-c.hot .hmm-b{transform:perspective(520px) translateY(-8px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(1.1);box-shadow:0 26px 40px -16px rgba(94,234,212,.5)}
+  .hmm-c.hot strong{color:#fff}
+  .hmm-c.hot{border-color:rgba(94,234,212,.55)}
+  .hmm-rail{cursor:grab}
+}
+@keyframes hmmShine{0%,55%{left:-60%;opacity:0}60%{opacity:1}100%{left:140%;opacity:0}}
+@media (hover:hover) and (pointer:fine) and (min-width:1000px){.hmm-c{width:210px;padding:22px 16px 18px;gap:14px}.hmm-b{width:136px;height:174px}.hmm-c strong{font-size:16px}.hmm-rail{gap:18px}}
+@media (prefers-reduced-motion:reduce){.hmm-c::before{animation:none!important}.hmm-b{transform:none!important}}
 @media (max-width:700px){.hmm{margin-top:56px;padding-top:34px}.hmm-c{width:158px}.hmm-b{width:100px;height:128px}.hmm-rail{margin-left:calc(var(--gut)*-1);margin-right:calc(var(--gut)*-1);padding-left:var(--gut);padding-right:var(--gut);scroll-padding-inline:var(--gut)}.hmm-nav{display:none}.hmm-tabs{flex-wrap:nowrap;overflow-x:auto;margin-left:calc(var(--gut)*-1);margin-right:calc(var(--gut)*-1);padding:0 var(--gut) 4px;scrollbar-width:none}.hmm-tabs::-webkit-scrollbar{display:none}.hmm-tabs button{flex:none}}
 /* certification gallery */
 .cfil{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
@@ -1358,6 +1378,14 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     ['Self and ethics',[['career_management','Career Management'],['leveraging_your_networks','Leveraging Your Networks'],['managing_your_boss','Managing Your Boss'],['stress_management','Stress Management'],['diversity','Diversity'],['ethics_at_work','Ethics at Work']]]
   ];
   var cur=-1,cards=[],raf=0,visible=false,front=-1;
+  var fine=!reduce&&matchMedia('(hover:hover) and (pointer:fine)').matches,hmm=document.getElementById('hmm');
+  function tilt(c){
+    c.addEventListener('pointermove',function(e){if(e.pointerType==='touch'||down)return;var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+      c.style.setProperty('--mx',(px*100).toFixed(1)+'%');c.style.setProperty('--my',(py*100).toFixed(1)+'%');
+      c.style.setProperty('--rx',((.5-py)*20).toFixed(1)+'deg');c.style.setProperty('--ry',((px-.5)*26).toFixed(1)+'deg');c.classList.add('hot')});
+    c.addEventListener('pointerleave',function(){c.classList.remove('hot');c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')})}
+  if(fine){hmm.addEventListener('pointermove',function(e){var r=hmm.getBoundingClientRect();hmm.style.setProperty('--sx',(e.clientX-r.left)+'px');hmm.style.setProperty('--sy',(e.clientY-r.top)+'px');hmm.classList.add('live')});
+    hmm.addEventListener('pointerleave',function(){hmm.classList.remove('live')})}
   var tabs=G.map(function(g,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML=g[0]+' <i>'+g[1].length+'</i>';b.addEventListener('click',function(){if(i!==cur)open(i,true)});tabsEl.appendChild(b);return b});
   function build(gi){
     rail.textContent='';cards=G[gi][1].map(function(d){
@@ -1366,7 +1394,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
       if(d[2]){b.innerHTML='HARVARD<br>Manage<br>Mentor'}else{var im=new Image();im.alt=d[1]+' badge';im.width=156;im.height=200;im.decoding='async';im.src='img/hmm/'+d[0]+'.jpg';b.appendChild(im)}
       var t=document.createElement('strong');t.textContent=d[1];
       var a=document.createElement('a');a.href='pdf-hmm/'+d[0]+'.pdf';a.target='_blank';a.rel='noopener';a.textContent='Open certificate';a.setAttribute('aria-label','Open the '+d[1]+' certificate as a PDF');
-      c.appendChild(b);c.appendChild(t);c.appendChild(a);rail.appendChild(c);return c});
+      c.appendChild(b);c.appendChild(t);c.appendChild(a);rail.appendChild(c);if(fine)tilt(c);return c});
     front=-1;
   }
   /* cards lift and tilt toward the centre as they pass; only transform and opacity change */
@@ -1388,10 +1416,11 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
   prev.addEventListener('click',function(){by(-1)});next.addEventListener('click',function(){by(1)});
   rail.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();by(1)}else if(e.key==='ArrowLeft'){e.preventDefault();by(-1)}});
   /* mouse users can drag too; touch uses native scrolling */
-  var down=false,sx=0,sl=0,moved=0;
-  rail.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;down=true;sx=e.clientX;sl=rail.scrollLeft;moved=0});
-  addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;moved=Math.max(moved,Math.abs(dx));if(moved>5)rail.classList.add('drag');rail.scrollLeft=sl-dx});
-  addEventListener('pointerup',function(){if(!down)return;down=false;setTimeout(function(){rail.classList.remove('drag')},0)});
+  var down=false,sx=0,sl=0,moved=0,vx=0,lx=0,lt=0,gl=0;
+  function glide(){rail.scrollLeft-=vx;vx*=.93;if(Math.abs(vx)>.3&&!down){gl=requestAnimationFrame(glide)}else{gl=0;rail.classList.remove('drag')}}
+  rail.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;cancelAnimationFrame(gl);gl=0;down=true;sx=lx=e.clientX;lt=performance.now();vx=0;sl=rail.scrollLeft;moved=0});
+  addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx,now=performance.now();moved=Math.max(moved,Math.abs(dx));if(moved>5)rail.classList.add('drag');rail.scrollLeft=sl-dx;vx=(e.clientX-lx)*(16/Math.max(8,now-lt))*.9;lx=e.clientX;lt=now});
+  addEventListener('pointerup',function(){if(!down)return;down=false;if(moved>5&&Math.abs(vx)>1&&!reduce){rail.classList.add('drag');gl=requestAnimationFrame(glide)}else setTimeout(function(){rail.classList.remove('drag')},0)});
   rail.addEventListener('click',function(e){if(moved>5){e.preventDefault();e.stopPropagation();moved=0}},true);
   function open(gi,anim){
     cur=gi;tabs.forEach(function(t,i){t.classList.toggle('on',i===gi);t.setAttribute('aria-selected',i===gi)});
