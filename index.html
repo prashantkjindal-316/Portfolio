@@ -455,24 +455,26 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
 .hmm-tabs button:hover{color:var(--ink);border-color:rgba(94,234,212,.5);transform:translateY(-1px)}
 .hmm-tabs button.on{color:#06141a;background:var(--cold);border-color:var(--cold)}
 .hmm-tabs button:focus-visible{outline:2px solid var(--cold);outline-offset:3px}
-.hmm-stage{position:relative;height:300px;perspective:1000px;overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;margin:10px 0 0;border-radius:22px;background:radial-gradient(60% 70% at 50% 62%,rgba(94,234,212,.09),transparent 72%)}
-.hmm-stage.drag{cursor:grabbing}
-.hmm-stage::after{content:"";position:absolute;left:12%;right:12%;bottom:18px;height:26px;border-radius:50%;background:radial-gradient(closest-side,rgba(94,234,212,.28),transparent);filter:blur(6px);pointer-events:none}
-.hmm-wrap{position:absolute;inset:0;transform-style:preserve-3d}
-.hmm-ring{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;will-change:transform}
-.hmm-it{all:unset;position:absolute;display:block;left:0;top:0;border-radius:16px;overflow:hidden;background:#0b1126;border:1px solid rgba(255,255,255,.12);box-shadow:0 18px 40px -14px rgba(0,0,0,.75);transition:border-color .3s,box-shadow .3s,filter .3s;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.hmm-it img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;pointer-events:none;-webkit-user-drag:none}
-.hmm-it.gen{display:grid;place-items:center;background:linear-gradient(160deg,#d946b5,#f2707a);color:#fff;font:800 13px var(--f-head);letter-spacing:.06em;text-align:center;line-height:1.3}
-.hmm-it.front{border-color:rgba(94,234,212,.75);box-shadow:0 0 0 1px rgba(94,234,212,.35),0 22px 60px -12px rgba(94,234,212,.45)}
-.hmm-it:focus-visible{outline:2px solid var(--cold);outline-offset:3px}
-.hmm-cap{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px;padding:16px 20px;border:1px solid var(--line);border-radius:16px;background:rgba(15,21,48,.55)}
-.hmm-cap b{display:block;font:700 clamp(18px,2.2vw,22px)/1.2 var(--f-head);letter-spacing:-.01em;transition:opacity .25s,transform .25s}
-.hmm-cap small{display:block;color:var(--ink-2);font-size:14px;margin-top:4px}
-.hmm-cap a{color:var(--cold);font:600 15px var(--f-body);border-bottom:1px solid transparent;transition:border-color .2s}
-.hmm-cap a:hover{border-color:var(--cold)}
-.hmm-cap.sw b{opacity:0;transform:translateY(6px)}
+.hmm-rail{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scroll-padding-inline:4px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;margin:14px 0 0;padding:26px 4px 30px;cursor:grab;touch-action:pan-x pan-y}
+.hmm-rail::-webkit-scrollbar{display:none}
+.hmm-rail.drag{cursor:grabbing;scroll-snap-type:none;user-select:none;-webkit-user-select:none}
+.hmm-c{flex:0 0 auto;width:176px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;padding:18px 14px 16px;border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(20,28,60,.7),rgba(11,17,38,.7));box-shadow:0 18px 40px -18px rgba(0,0,0,.8);transition:border-color .3s,box-shadow .3s;will-change:transform,opacity}
+.hmm-c.front{border-color:rgba(94,234,212,.6);box-shadow:0 0 0 1px rgba(94,234,212,.25),0 22px 56px -16px rgba(94,234,212,.4)}
+.hmm-b{width:112px;height:143px;border-radius:14px;overflow:hidden;background:#0b1126;display:block}
+.hmm-b img{display:block;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;-webkit-user-drag:none;pointer-events:none}
+.hmm-b.gen{display:grid;place-items:center;background:linear-gradient(160deg,#d946b5,#f2707a);color:#fff;font:800 13px var(--f-head);letter-spacing:.06em;line-height:1.3}
+.hmm-c strong{font:700 15px/1.25 var(--f-head);letter-spacing:-.01em;min-height:38px;display:flex;align-items:center}
+.hmm-c a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 14px;white-space:nowrap;border-radius:999px;border:1px solid rgba(94,234,212,.45);color:var(--cold);font:600 13px var(--f-body);transition:background .2s,color .2s;-webkit-tap-highlight-color:transparent}
+.hmm-c a:hover,.hmm-c a:focus-visible{background:var(--cold);color:#06141a;outline:none}
+.hmm-bar{display:flex;align-items:center;gap:14px;margin-top:2px}
+.hmm-prog{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+.hmm-prog i{display:block;height:100%;width:20%;border-radius:3px;background:linear-gradient(90deg,var(--cold),#8ea2ff);transform-origin:left;will-change:transform}
+.hmm-nav{display:flex;gap:8px}
+.hmm-nav button{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);font:600 18px var(--f-body);transition:border-color .2s,background .2s;-webkit-tap-highlight-color:transparent}
+.hmm-nav button:hover{border-color:rgba(94,234,212,.6);background:rgba(94,234,212,.08)}
+.hmm-nav button:focus-visible{outline:2px solid var(--cold);outline-offset:3px}
 .hmm-hint{color:var(--ink-2);font-size:13px;margin-top:12px;letter-spacing:.02em}
-@media (max-width:700px){.hmm{margin-top:56px;padding-top:34px}.hmm-stage{height:236px}.hmm-tabs{flex-wrap:nowrap;overflow-x:auto;margin-left:calc(var(--gut)*-1);margin-right:calc(var(--gut)*-1);padding:0 var(--gut) 4px;scrollbar-width:none}.hmm-tabs::-webkit-scrollbar{display:none}.hmm-tabs button{flex:none}}
+@media (max-width:700px){.hmm{margin-top:56px;padding-top:34px}.hmm-c{width:158px}.hmm-b{width:100px;height:128px}.hmm-rail{margin-left:calc(var(--gut)*-1);margin-right:calc(var(--gut)*-1);padding-left:var(--gut);padding-right:var(--gut);scroll-padding-inline:var(--gut)}.hmm-nav{display:none}.hmm-tabs{flex-wrap:nowrap;overflow-x:auto;margin-left:calc(var(--gut)*-1);margin-right:calc(var(--gut)*-1);padding:0 var(--gut) 4px;scrollbar-width:none}.hmm-tabs::-webkit-scrollbar{display:none}.hmm-tabs button{flex:none}}
 /* certification gallery */
 .cfil{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
 .cfil button{all:unset;cursor:pointer;padding:8px 16px;border:1px solid var(--line);border-radius:999px;font:500 15px var(--f-body);color:var(--ink-2);transition:all .25s}
@@ -723,14 +725,14 @@ footer{border-top:1px solid var(--line);padding:28px 0;color:var(--ink-2);font-s
       <div class="hmm-head">
         <div>
           <h3>Harvard ManageMentor<sup>&reg;</sup></h3>
-          <p>Forty-five completed modules issued by Harvard Business Impact in November 2026, grouped into six areas. Pick an area, spin the ring, and open any certificate.</p>
+          <p>Forty-five completed modules issued by Harvard Business Impact in November 2026, grouped into six areas. Pick an area, swipe through the badges, and open any certificate.</p>
         </div>
         <div class="hmm-count" aria-label="45 completed modules"><b id="hmmN">45</b><span>modules</span></div>
       </div>
       <div class="hmm-tabs" id="hmmTabs" role="tablist" aria-label="Harvard ManageMentor areas"></div>
-      <div class="hmm-stage" id="hmmStage"><div class="hmm-wrap" id="hmmWrap"><div class="hmm-ring" id="hmmRing"></div></div></div>
-      <div class="hmm-cap" id="hmmCap"><div><b id="hmmT">Strategic Thinking</b><small id="hmmS">Harvard Business Impact, November 2026</small></div><a id="hmmA" href="pdf-hmm/strategic_thinking.pdf" target="_blank" rel="noopener">Open certificate (PDF)</a></div>
-      <p class="hmm-hint">Drag or swipe to spin. Tap a badge to bring it to the front.</p>
+      <div class="hmm-rail" id="hmmRail" role="list" aria-label="Certificates in this area"></div>
+      <div class="hmm-bar"><div class="hmm-prog" aria-hidden="true"><i id="hmmP"></i></div><div class="hmm-nav"><button type="button" id="hmmPrev" aria-label="Previous certificates">&#8592;</button><button type="button" id="hmmNext" aria-label="Next certificates">&#8594;</button></div></div>
+      <p class="hmm-hint">Swipe or drag sideways. Every card opens its own certificate.</p>
     </div>
   </div>
 </section>
@@ -1342,11 +1344,10 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
 </script>
 
 <script>
-/* Harvard ManageMentor: 3D badge ring. Spin it, pick an area, open the certificate. */
+/* Harvard ManageMentor: swipeable rail of badges, six areas, one certificate link per badge. */
 (function(){
-  var stage=document.getElementById('hmmStage');if(!stage)return;
-  var ring=document.getElementById('hmmRing'),wrap=document.getElementById('hmmWrap'),tabsEl=document.getElementById('hmmTabs'),cap=document.getElementById('hmmCap'),
-      capT=document.getElementById('hmmT'),capS=document.getElementById('hmmS'),capA=document.getElementById('hmmA'),numEl=document.getElementById('hmmN');
+  var rail=document.getElementById('hmmRail');if(!rail)return;
+  var tabsEl=document.getElementById('hmmTabs'),numEl=document.getElementById('hmmN'),prog=document.getElementById('hmmP'),prev=document.getElementById('hmmPrev'),next=document.getElementById('hmmNext');
   var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var G=[
     ['Strategy and business',[['strategic_thinking','Strategic Thinking'],['strategy_planning_and_execution','Strategy Planning and Execution'],['sharpening_your_business_acumen','Sharpening Your Business Acumen'],['business_case_development','Business Case Development'],['business_plan_development','Business Plan Development'],['decision_making','Decision Making'],['customer_focus','Customer Focus'],['marketing_essentials','Marketing Essentials'],['crisis_management','Crisis Management']]],
@@ -1356,66 +1357,52 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     ['Communication and influence',[['negotiating','Negotiating'],['persuading_others','Persuading Others'],['presentation_skills','Presentation Skills'],['writing_skills','Writing Skills'],['difficult_interactions','Difficult Interactions'],['feedback_essentials','Feedback Essentials'],['meeting_management','Meeting Management'],['global_collaboration','Global Collaboration']]],
     ['Self and ethics',[['career_management','Career Management'],['leveraging_your_networks','Leveraging Your Networks'],['managing_your_boss','Managing Your Boss'],['stress_management','Stress Management'],['diversity','Diversity'],['ethics_at_work','Ethics at Work']]]
   ];
-  var switching=false,want=null,cur=-1,items=[],n=0,step=0,R=0,RZ=0,W=0,H=0,ang=0,vel=0,front=-1,drag=false,moved=0,lastX=0,lastT=0,autoAt=0,visible=false,raf=0,busy=false,target=null;
+  var cur=-1,cards=[],raf=0,visible=false,front=-1;
   var tabs=G.map(function(g,i){var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML=g[0]+' <i>'+g[1].length+'</i>';b.addEventListener('click',function(){if(i!==cur)open(i,true)});tabsEl.appendChild(b);return b});
-  function dims(){W=innerWidth<700?78:100;H=Math.round(W*1.28)}
   function build(gi){
-    dims();var list=G[gi][1];n=list.length;step=360/n;var sw=stage.clientWidth||900;R=Math.max(W*1.5,Math.min(sw*(innerWidth<700?.34:.36),W/2/Math.tan(Math.PI/n)*2.1));RZ=R*(innerWidth<700?.55:.5);
-    ring.textContent='';items=list.map(function(d,i){
-      var b=document.createElement('button');b.type='button';b.className='hmm-it'+(d[2]?' gen':'');b.style.width=W+'px';b.style.height=H+'px';b.style.marginLeft=-W/2+'px';b.style.marginTop=-H/2+'px';
-      b.setAttribute('aria-label',d[1]+', Harvard ManageMentor badge');
-      if(d[2]){b.innerHTML='HARVARD<br>Manage<br>Mentor'}else{var im=new Image();im.alt='';im.width=156;im.height=200;im.decoding='async';im.src='img/hmm/'+d[0]+'.jpg';b.appendChild(im)}
-      b.addEventListener('click',function(e){if(moved>6&&e.detail!==0)return;snapTo(i)});
-      ring.appendChild(b);return b});
+    rail.textContent='';cards=G[gi][1].map(function(d){
+      var c=document.createElement('div');c.className='hmm-c';c.setAttribute('role','listitem');
+      var b=document.createElement('span');b.className='hmm-b'+(d[2]?' gen':'');
+      if(d[2]){b.innerHTML='HARVARD<br>Manage<br>Mentor'}else{var im=new Image();im.alt=d[1]+' badge';im.width=156;im.height=200;im.decoding='async';im.src='img/hmm/'+d[0]+'.jpg';b.appendChild(im)}
+      var t=document.createElement('strong');t.textContent=d[1];
+      var a=document.createElement('a');a.href='pdf-hmm/'+d[0]+'.pdf';a.target='_blank';a.rel='noopener';a.textContent='Open certificate';a.setAttribute('aria-label','Open the '+d[1]+' certificate as a PDF');
+      c.appendChild(b);c.appendChild(t);c.appendChild(a);rail.appendChild(c);return c});
     front=-1;
   }
-  function norm(a){a=a%360;return a<0?a+360:a}
-  function frontIdx(){return Math.round(norm(-ang)/step)%n}
-  function pos(i,a){var t=(i*step+a)*Math.PI/180,c=Math.cos(t);return {t:'translate3d('+(R*Math.sin(t)).toFixed(1)+'px,'+(-14*c).toFixed(1)+'px,'+(RZ*(c-1)).toFixed(1)+'px) scale('+(.82+.18*(c+1)/2).toFixed(3)+')',o:(.2+.8*Math.pow((c+1)/2,1.6)).toFixed(3),c:c}}
-  function paint(){for(var i=0;i<n;i++){var q=pos(i,ang),el=items[i];el.style.transform=q.t;el.style.opacity=q.o;el.style.zIndex=Math.round((q.c+1)*50)}var f=frontIdx();if(f!==front){setFront(f)}}
-  function setFront(f){
-    if(front>=0&&items[front])items[front].classList.remove('front');front=f;if(items[f])items[f].classList.add('front');
-    var d=G[cur][1][f];
-    if(reduce){fillCap(d)}else{cap.classList.add('sw');clearTimeout(setFront.t);setFront.t=setTimeout(function(){fillCap(d);cap.classList.remove('sw')},140)}
+  /* cards lift and tilt toward the centre as they pass; only transform and opacity change */
+  function fx(){
+    raf=0;var r=rail.getBoundingClientRect(),mid=r.left+r.width/2,best=1e9,bi=-1;
+    for(var i=0;i<cards.length;i++){var q=cards[i].getBoundingClientRect(),dx=q.left+q.width/2-mid,ad=Math.abs(dx);
+      if(ad<best){best=ad;bi=i}
+      if(reduce)continue;
+      var d=Math.min(1,ad/(r.width*.55)),sg=dx<0?1:-1;
+      cards[i].style.transform='perspective(700px) translateY('+(-8*(1-d)).toFixed(1)+'px) rotateY('+(sg*d*16).toFixed(1)+'deg) scale('+(1-.1*d).toFixed(3)+')';
+      cards[i].style.opacity=(1-.5*d*d).toFixed(3)}
+    if(bi!==front){if(cards[front])cards[front].classList.remove('front');front=bi;if(cards[bi])cards[bi].classList.add('front')}
+    var max=rail.scrollWidth-rail.clientWidth,p=max>0?rail.scrollLeft/max:0,vis=rail.clientWidth/Math.max(1,rail.scrollWidth);
+    prog.style.width=Math.max(12,vis*100)+'%';prog.style.transform='translateX('+(p*(100/Math.max(.12,vis)-100)).toFixed(1)+'%)';
   }
-  function fillCap(d){capT.textContent=d[1];capS.textContent='Harvard Business Impact, November 2026';capA.href='pdf-hmm/'+d[0]+'.pdf';capA.setAttribute('aria-label','Open the '+d[1]+' certificate as a PDF')}
-  function snapTo(i){var want=-i*step,diff=((want-ang)%360+540)%360-180;target=ang+diff;vel=0;autoAt=performance.now()+5000;if(reduce){ang=target;target=null;paint()}}
-  function loop(now){
-    raf=0;if(!visible||document.hidden)return;
-    if(target!==null){ang+=(target-ang)*.14;if(Math.abs(target-ang)<.05){ang=target;target=null}}
-    else if(!drag){ang+=vel;vel*=.94;if(Math.abs(vel)<.02)vel=0;if(!reduce&&vel===0&&now>autoAt&&!busy)ang-=.07}
-    paint();raf=requestAnimationFrame(loop)
-  }
-  function kick(){if(!raf&&visible&&!document.hidden)raf=requestAnimationFrame(loop)}
+  function kick(){if(!raf)raf=requestAnimationFrame(fx)}
+  rail.addEventListener('scroll',kick,{passive:true});addEventListener('resize',kick);
+  function by(dir){rail.scrollBy({left:dir*Math.max(200,rail.clientWidth*.7),behavior:reduce?'auto':'smooth'})}
+  prev.addEventListener('click',function(){by(-1)});next.addEventListener('click',function(){by(1)});
+  rail.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();by(1)}else if(e.key==='ArrowLeft'){e.preventDefault();by(-1)}});
+  /* mouse users can drag too; touch uses native scrolling */
+  var down=false,sx=0,sl=0,moved=0;
+  rail.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;down=true;sx=e.clientX;sl=rail.scrollLeft;moved=0});
+  addEventListener('pointermove',function(e){if(!down)return;var dx=e.clientX-sx;moved=Math.max(moved,Math.abs(dx));if(moved>5)rail.classList.add('drag');rail.scrollLeft=sl-dx});
+  addEventListener('pointerup',function(){if(!down)return;down=false;setTimeout(function(){rail.classList.remove('drag')},0)});
+  rail.addEventListener('click',function(e){if(moved>5){e.preventDefault();e.stopPropagation();moved=0}},true);
   function open(gi,anim){
-    var go=function(){
-      cur=gi;tabs.forEach(function(t,i){t.classList.toggle('on',i===gi);t.setAttribute('aria-selected',i===gi)});
-      build(gi);ang=0;target=null;vel=0;autoAt=performance.now()+2500;paint();
-      if(!reduce&&ring.animate){items.forEach(function(el,i){var end=el.style.transform,eo=+el.style.opacity;el.animate([{transform:'translate3d(0px,0px,-60px) scale(.5)',opacity:0},{transform:end,opacity:eo}],{duration:820,delay:i*45,easing:'cubic-bezier(.2,.9,.2,1)',fill:'backwards'})});
-        wrap.animate([{transform:'scale(.9) rotateZ(-2deg)',opacity:.4},{transform:'none',opacity:1}],{duration:520,easing:'cubic-bezier(.2,.9,.2,1)'})}
-      busy=true;setTimeout(function(){busy=false},900);kick()};
-    if(switching){want=gi;return}
-    if(anim&&!reduce&&wrap.animate&&cur>=0){switching=true;var done=false,a=wrap.animate([{transform:'none',opacity:1},{transform:'scale(.82) rotateY(70deg)',opacity:0}],{duration:240,easing:'ease-in',fill:'forwards'});
-      var fin=function(){if(done)return;done=true;try{a.cancel()}catch(_){}switching=false;go();if(want!==null&&want!==gi){var w=want;want=null;open(w,true)}else want=null};
-      a.onfinish=fin;setTimeout(fin,500)}else go()
+    cur=gi;tabs.forEach(function(t,i){t.classList.toggle('on',i===gi);t.setAttribute('aria-selected',i===gi)});
+    build(gi);rail.scrollLeft=0;fx();
+    if(anim!==false&&!reduce&&rail.animate){cards.forEach(function(el,i){var o=+el.style.opacity||1;el.animate([{transform:'translateX(48px) scale(.88)',opacity:0},{transform:el.style.transform||'none',opacity:o}],{duration:620,delay:i*55,easing:'cubic-bezier(.2,.9,.2,1)',fill:'backwards'})})}
   }
-  /* drag to spin */
-  var pid=null;
-  stage.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse'&&e.button!==0)return;drag=true;moved=0;lastX=e.clientX;lastT=performance.now();vel=0;target=null;pid=e.pointerId;autoAt=performance.now()+5000});
-  stage.addEventListener('pointermove',function(e){if(!drag||e.pointerId!==pid)return;var dx=e.clientX-lastX,now=performance.now();moved+=Math.abs(dx);
-    if(moved>6&&!stage.classList.contains('drag')){stage.classList.add('drag');try{stage.setPointerCapture(pid)}catch(_){}}
-    ang+=dx*.42;vel=dx*.42*(16/Math.max(8,now-lastT))*.9;lastX=e.clientX;lastT=now;kick()});
-  function end(e){if(!drag)return;drag=false;stage.classList.remove('drag');autoAt=performance.now()+4000;try{stage.releasePointerCapture(pid)}catch(_){}kick()}
-  stage.addEventListener('pointerup',end);stage.addEventListener('pointercancel',end);
-  stage.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();snapTo(((front+(e.key==='ArrowRight'?-1:1))%n+n)%n)}});
-  addEventListener('resize',function(){if(cur<0)return;var f=front;build(cur);ang=-(f<0?0:f)*step;paint()});
-  document.addEventListener('visibilitychange',kick);
-  /* start when scrolled into view: count up, fan the badges out */
   var seen=false;
   new IntersectionObserver(function(es){visible=es[0].isIntersecting;
-    if(visible&&!seen){seen=true;open(0,false);
+    if(visible&&!seen){seen=true;open(0,true);
       if(!reduce){setTimeout(function(){numEl.textContent=45},1800);var t0=performance.now(),to=45;(function tick(now){var p=Math.min(1,(now-t0)/1400),e=1-Math.pow(1-p,3);numEl.textContent=Math.round(to*e);if(p<1)requestAnimationFrame(tick)})(t0)}}
-    kick()},{threshold:.2}).observe(stage);
+    },{threshold:.2}).observe(rail);
   if(!reduce)numEl.textContent='0';
 })();
 </script>
