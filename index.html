@@ -1377,6 +1377,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     ['Communication and influence',[['negotiating','Negotiating'],['persuading_others','Persuading Others'],['presentation_skills','Presentation Skills'],['writing_skills','Writing Skills'],['difficult_interactions','Difficult Interactions'],['feedback_essentials','Feedback Essentials'],['meeting_management','Meeting Management'],['global_collaboration','Global Collaboration']]],
     ['Self and ethics',[['career_management','Career Management'],['leveraging_your_networks','Leveraging Your Networks'],['managing_your_boss','Managing Your Boss'],['stress_management','Stress Management'],['diversity','Diversity'],['ethics_at_work','Ethics at Work']]]
   ];
+  G.unshift(['All',[].concat.apply([],G.map(function(g){return g[1]}))]);
   var cur=-1,cards=[],raf=0,visible=false,front=-1;
   var fine=!reduce&&matchMedia('(hover:hover) and (pointer:fine)').matches,hmm=document.getElementById('hmm');
   function tilt(c){
@@ -1391,7 +1392,7 @@ fetch('data/automation-stats.json',{cache:'no-cache'}).then(function(r){return r
     rail.textContent='';cards=G[gi][1].map(function(d){
       var c=document.createElement('div');c.className='hmm-c';c.setAttribute('role','listitem');
       var b=document.createElement('span');b.className='hmm-b'+(d[2]?' gen':'');
-      if(d[2]){b.innerHTML='HARVARD<br>Manage<br>Mentor'}else{var im=new Image();im.alt=d[1]+' badge';im.width=156;im.height=200;im.decoding='async';im.src='img/hmm/'+d[0]+'.jpg';b.appendChild(im)}
+      if(d[2]){b.innerHTML='HARVARD<br>Manage<br>Mentor'}else{var im=new Image();im.alt=d[1]+' badge';im.width=156;im.height=200;im.decoding='async';im.loading='lazy';im.src='img/hmm/'+d[0]+'.jpg';b.appendChild(im)}
       var t=document.createElement('strong');t.textContent=d[1];
       var a=document.createElement('a');a.href='pdf-hmm/'+d[0]+'.pdf';a.target='_blank';a.rel='noopener';a.textContent='Open certificate';a.setAttribute('aria-label','Open the '+d[1]+' certificate as a PDF');
       c.appendChild(b);c.appendChild(t);c.appendChild(a);rail.appendChild(c);if(fine)tilt(c);return c});
