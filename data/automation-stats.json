@@ -1,19 +1,19 @@
 {
- "updated": "2026-11-22",
+ "updated": "2026-11-25",
  "friday": {
-  "roles_scored": 252,
-  "shortlisted": 105,
-  "dropped": 147,
-  "companies": 191,
-  "days_run": 15,
-  "documents": 407
+  "roles_scored": 277,
+  "shortlisted": 123,
+  "dropped": 154,
+  "companies": 203,
+  "days_run": 18,
+  "documents": 461
  },
  "jarvis": {
-  "runs": 15,
-  "firms_checked": 950
+  "runs": 16,
+  "firms_checked": 961
  },
  "audit": {
   "runs_complete": 0,
-  "runs_flagged": 1
+  "runs_flagged": 2
  }
 }
